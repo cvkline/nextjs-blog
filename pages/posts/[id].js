@@ -21,7 +21,7 @@ export default function Post(props) {
       </Head>
       <h1 className={utilStyles.headingXl}>{props.postData.title}</h1>
       <div className={utilStyles.lightText}>
-        <FormattedDate locale="de" dateString={props.postData.date} />
+        <FormattedDate locale={props.locale} dateString={props.postData.date} />
       </div>
       <hr />
       <div dangerouslySetInnerHTML={{ __html: props.postData.contentHTML }} />

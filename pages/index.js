@@ -13,7 +13,7 @@ export async function getStaticProps() {
   }
 }
 
-const Home = ({allPostsData}) => (
+const Home = ({allPostsData, locale}) => (
   <Layout home>
     <Head>
       <title>{siteTitle}</title>
@@ -36,7 +36,7 @@ const Home = ({allPostsData}) => (
             </Link>
             <br />
             <small className={utilStyles.lightText}>
-              <FormattedDate locale="de" dateString={date} />
+              <FormattedDate locale={locale} dateString={date} />
             </small>
           </li>
         ))}
