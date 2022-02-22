@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
 import {codeFont, headingTiny} from '../styles/utils.module.css';
 
-const formatter = new Intl.DateTimeFormat('de-DE', {dateStyle: 'long', timeStyle: 'medium'});
+const dtfOpts = {
+  weekday: 'short',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric'
+}
+
+const formatter = new Intl.DateTimeFormat('de-DE', dtfOpts);
 
 export default function CurrentTime() {
   const [time, setTime] = useState(null);
@@ -26,9 +35,9 @@ export default function CurrentTime() {
   const value = time ? formatter.format(time) : '???';
 
   return (
-    <>
-      <h3 className={headingTiny}>Aktuelles Datum und Uhrzeit</h3>
+    <div style={{background: 'yellow'}}>
+      <h2 className={headingTiny}>Aktuelles Datum und Uhrzeit</h2>
       <span className={codeFont}>{value}</span>
-    </>
+    </div>
   )
 }
