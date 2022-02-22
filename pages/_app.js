@@ -1,5 +1,7 @@
 import '../styles/global.css';
 
-const App = ({ Component, pageProps }) => <Component {...pageProps} />;
+const locale = 'de';
+
+const App = ({ Component, pageProps }) => <Component {...pageProps} locale={locale} />;
 
 export default App;

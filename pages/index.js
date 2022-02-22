@@ -1,11 +1,13 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import CurrentTime from '../components/current-time';
+import FormattedDate from '../components/formatted-date';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+  const allPostsData = await getSortedPostsData()
   return {
     props: {allPostsData}
   }
@@ -29,11 +31,13 @@ const Home = ({allPostsData}) => (
       <ul className={utilStyles.list}>
         {allPostsData.map(({ id, date, title }) => (
           <li className={utilStyles.listItem} key={id}>
-            {title}
+            <Link href={`/posts/${id}`}>
+              <a>{title}</a>
+            </Link>
             <br />
-            {id}
-            <br />
-            {date}
+            <small className={utilStyles.lightText}>
+              <FormattedDate locale="de" dateString={date} />
+            </small>
           </li>
         ))}
       </ul>
