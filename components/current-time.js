@@ -36,7 +36,7 @@ export default function CurrentTime() {
 
   return (
     <div style={{background: 'yellow'}}>
-      <h2 className={headingTiny}>Aktuelles Datum und Uhrzeit</h2>
+      <h2 className={headingTiny}>Aktuelles Datum und Uhrzeit (Beispiel für clientseitige Hydratation)</h2>
       <span className={codeFont}>{value}</span>
     </div>
   )

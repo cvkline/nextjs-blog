@@ -20,10 +20,10 @@ const Home = ({allPostsData, locale}) => (
     </Head>
     <section><CurrentTime /></section>
     <section className={utilStyles.headingMd}>
-      <p>(Meine "Selbstvorstellung" kommt bald.)</p>
+      <p>Na ja, meine "Selbstvorstellung" kommt bald.</p>
       <p>
-        (Dies ist eine Beispiel-Website. Sie werden eine solche in unserem{' '}
-        <a href="https://nextjs.org/learn">Next.js Tutorial</a> erstellen.)
+        (Dies ist eine Beispiel-Website. Man kann ein ähnliches im{' '}
+        <a href="https://nextjs.org/learn">Next.js-Tutorial</a> erstellen.)
       </p>
     </section>
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
