@@ -4,9 +4,16 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
+export interface PostData {
+  id: string;
+  contentHTML?: string;
+  date: string;
+  title: string;
+}
+
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export async function getPostData(id, withContent = true) {
+export async function getPostData(id: string, withContent: boolean = true): Promise<PostData> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -16,23 +23,29 @@ export async function getPostData(id, withContent = true) {
   if (withContent) {
     const processedContent = await remark().use(html).process(matterResult.content);
     const contentHTML = processedContent.toString();
-    return { id, contentHTML, ...matterResult.data };
+    return {
+      id,
+      contentHTML,
+      ...(matterResult.data as {date: string, title: string})
+    };
   }
 
   // Just return id and metadata if no content requested
-  return { id, ...matterResult.data };
+  return {
+    id, ...(matterResult.data as {date: string, title: string})
+  };
 }
 
-export async function getSortedPostsData() {
+export async function getSortedPostsData(): Promise<Array<PostData>> {
   // Get post ids under /posts
-  const ids = fs.readdirSync(postsDirectory).map(fn => fn.replace(/\.md$/, ''));
-  const allPostsData = await Promise.all(ids.map(id => getPostData(id, false)));
+  const ids: Array<string> = fs.readdirSync(postsDirectory).map(fn => fn.replace(/\.md$/, ''));
+  const allPostsData: Array<PostData> = await Promise.all(ids.map(id => getPostData(id, false)));
 
   // Sort posts descending by date
-  return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
       return 1;
-    } else if (a > b) {
+    } else if (a.date > b.date) {
       return -1;
     } else {
       return 0;
